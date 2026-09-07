@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Layer A strips `Made-with: Cursor` and other known-agent trailers (Aider, Amp, Gemini, …). Human GitHub `users.noreply.github.com` co-authors are no longer stripped.
+- Layer A strips `Made-with: Cursor`, `Amp-Thread-ID`, OpenCode `Generated with` banners, and other known-agent trailers (Aider, Amp, Gemini, …). Human GitHub `users.noreply.github.com` co-authors are no longer stripped.
 - `init-rewrite` wizard and `~/.anthropies/config.json` fallback for humanize rewrite settings (PR #8). Env vars still win. Default remains `print-prompt`.
 
 ## 1.0.0 DarioCyclovir — 2026-08-23

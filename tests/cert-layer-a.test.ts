@@ -36,6 +36,25 @@ describe("cert_layer_a_roundtrip", () => {
     expect(text).not.toMatch(/Generated with Cursor/)
     expect(text).toMatch(/print\(1\)/)
   })
+  it("strips Made with Cursor banner from Cursor docs", () => {
+    const { text, removed } = applyLayerA("feat: retry\n\nMade with Cursor\n")
+    expect(text).not.toMatch(/Made with Cursor/)
+    expect(removed.banner).toBeGreaterThan(0)
+  })
+  it("strips Amp-Thread-ID trailer without touching the subject", () => {
+    const src =
+      "feat: retry backoff\n\nAmp-Thread-ID: https://ampcode.com/threads/abc\nCo-authored-by: Jane Doe <jane@example.com>\n"
+    const { text, removed } = applyLayerA(src)
+    expect(text).not.toMatch(/Amp-Thread-ID/)
+    expect(text).toMatch(/jane@example\.com/)
+    expect(text).toMatch(/feat: retry backoff/)
+    expect(removed.trailer).toBeGreaterThan(0)
+  })
+  it("strips OpenCode Generated-with banner", () => {
+    const { text } = applyLayerA("feat: retry\n\n🤖 Generated with [opencode](https://opencode.ai)\n")
+    expect(text).not.toMatch(/opencode\.ai/)
+    expect(text).toMatch(/feat: retry/)
+  })
   it("keeps a human GitHub noreply co-author", () => {
     const src =
       "Fix the bug\n\nCo-authored-by: Jane Doe <123+jane@users.noreply.github.com>\n"
