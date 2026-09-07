@@ -115,6 +115,7 @@ If the current host is already unmarked (Grok, local open-weight, etc.), rewrite
 ## Additional resources
 
 - `references/mark.md` — how the mark works
+- Cursor: symlink or copy this directory to `~/.cursor/skills/purge-anthropies` (see README How-to-run)
 - Start the service: `npx anthropies serve` (default `http://127.0.0.1:8765`)
 - Discover routes: `GET $ANTHROPIES_SERVICE_URL/openapi.json`
 - Repo CLI: `npx anthropies --help` or `node dist/cli.js --help`

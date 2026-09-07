@@ -157,10 +157,21 @@ Default `humanize` is print-prompt: it prints a rewrite prompt and **does not de
 mkdir -p ~/.grok/skills
 ln -sfn "$(pwd)/skills/purge-anthropies" ~/.grok/skills/purge-anthropies
 
+# Cursor (same skill file; Cursor loads ~/.cursor/skills)
+mkdir -p ~/.cursor/skills
+ln -sfn "$(pwd)/skills/purge-anthropies" ~/.cursor/skills/purge-anthropies
+
 # Claude Code: clean + print-prompt only. Do not rewrite with Claude.
 mkdir -p ~/.claude/skills
 ln -sfn "$(pwd)/skills/purge-anthropies" ~/.claude/skills/purge-anthropies
 # or: claude --plugin-dir "$(pwd)"
+```
+
+Windows (PowerShell; `ln -sfn` is not available):
+
+```powershell
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.cursor\skills" | Out-Null
+Copy-Item -Recurse -Force .\skills\purge-anthropies "$env:USERPROFILE\.cursor\skills\purge-anthropies"
 ```
 
 In an agent session: `/purge-anthropies`. Skill: [`skills/purge-anthropies/SKILL.md`](skills/purge-anthropies/SKILL.md). Slash: [`commands/purge-anthropies.md`](commands/purge-anthropies.md). Plugin: [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json).
